@@ -19,7 +19,7 @@ The user would receive a daily wisdom message from the teacher either through a 
 - The user should be able to see a list (or a calendar) of Dharma Moon courses and events.
 
 ## Optional Stories:
-
+`
 -The user could watch videos recorded by David or other teachers giving basic - meditation instructions. Maybe some other video content as well.
 
 - The user could share stories, thoughts, or experiences with other users in a user feed.
