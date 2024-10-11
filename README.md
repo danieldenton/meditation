@@ -19,6 +19,7 @@ The user would receive a daily wisdom message from the teacher either through a 
 - The user should be able to see a list (or a calendar) of Dharma Moon courses and events.
 
 ## Optional Stories:
+
 `
 -The user could watch videos recorded by David or other teachers giving basic - meditation instructions. Maybe some other video content as well.
 
@@ -28,17 +29,17 @@ The user would receive a daily wisdom message from the teacher either through a 
 
 ## Get started
 
-1. Install dependencies
+1. Install dependencies. We are using yarn NOT npm. if you don't have yarn installed click [here](https://yarnpkg.com/getting-started) to view the docs.
 
- ```bash
-   yarn 
-   ```
+```bash
+  yarn
+```
 
 2. Start the app.
 
- ```bash
-    npx expo start
-   ```
+```bash
+   npx expo start
+```
 
 In the output, you'll find options to open the app in a
 
