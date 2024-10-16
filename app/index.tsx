@@ -1,4 +1,5 @@
 import { Image, StyleSheet, Platform } from "react-native";
+import { Link } from "expo-router";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
@@ -31,6 +32,27 @@ export default function HomeScreen() {
           I left the above image cuz we could easily put an image right there.
         </ThemedText>
       </ThemedView>
+      <ThemedView style={styles.titleContainer}>
+        <Link href={"/timer"}>
+          <ThemedText type="link">Timer</ThemedText>
+          </Link>
+      </ThemedView>
+      <ThemedView style={styles.titleContainer}>
+        <Link href={"/community"}>
+          <ThemedText type="link">Community</ThemedText>
+          </Link>
+      </ThemedView>
+      <ThemedView style={styles.titleContainer}>
+        <Link href={"/food-for-non-thought"}>
+          <ThemedText type="link">Food for Non-Thought</ThemedText>
+          </Link>
+      </ThemedView>
+      <ThemedView style={styles.titleContainer}>
+        <Link href={"/events"}>
+          <ThemedText type="link">Events</ThemedText>
+          </Link>
+      </ThemedView>
+      
     </ParallaxScrollView>
   );
 }
