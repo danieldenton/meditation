@@ -5,7 +5,7 @@ import { ThemedView } from "@/components/ThemedView";
 import { styles } from "@/constants/styles";
 
 
-export default function EventsScreen() {
+export default function FoodForNonThoughtScreen() {
   return (
     <View style={styles.container}>
     <ThemedView>
