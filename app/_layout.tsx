@@ -31,6 +31,9 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
+        <Stack.Screen name="news-letter" />
+        <Stack.Screen name="events" />
+        <Stack.Screen name="community" />
       </Stack>
     </ThemeProvider>
   );
