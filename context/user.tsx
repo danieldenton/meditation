@@ -1,4 +1,4 @@
-import { ReactNode, Dispatch, createContext, useState, SetStateAction, useEffect } from "react";
+import { ReactNode, Dispatch, createContext, useState, SetStateAction, useEffect, useContext } from "react";
 
 type User = {
   id: number;
@@ -12,7 +12,7 @@ type UserContextType = {
   setUser: Dispatch<SetStateAction<User | null>>;
 };
 
-export const UserContext = createContext<UserContextType | null>(null);
+const UserContext = createContext<UserContextType | null>(null);
 
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -29,4 +29,12 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </UserContext.Provider>
   );
+};
+
+export const useUser = () => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error("useUser must be used within a UserContextProvider");
+  }
+  return context;
 };
