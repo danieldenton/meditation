@@ -37,6 +37,10 @@ The user would receive a daily wisdom message from the teacher either through a 
 
 2. Start the app.
 
+**_ yarn expo start - GPT said use this?? _**
+
+////// been reading over your code in pages branch line by line to get familiar. ill make some progress this weekend. putting this here to have a change to push //////
+
 ```bash
    npx expo start
 ```
