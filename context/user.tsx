@@ -8,6 +8,7 @@ import {
   useContext,
 } from "react";
 import { useRouter } from "expo-router";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 type StateSetter = Dispatch<SetStateAction<string>>;
 
@@ -50,12 +51,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const handleRegister = () => {
-    if (!firstName) {
-      setError("Please enter your first name");
-      return;
-    }
-    if (!lastName) {
-      setError("Please enter your last name");
+    if (!firstName || !lastName) {
+      setError("Please enter your first and last name");
       return;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -67,8 +64,23 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       setError("Passwords do not match");
       return;
     }
-    setError("");
-    router.push("/(app)");
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        // see what user looks like
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+        console.error(errorCode, errorMessage);
+      }).finally(() => {
+        // POST USER TO DB HERE
+        setError("");
+        router.push("/(app)");
+      })
   };
 
   const signOut = () => {
