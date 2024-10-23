@@ -48,7 +48,7 @@ export default function RegisterScreen() {
           style={styles.input}
           onChangeText={(text) => setPassword(text)}
           secureTextEntry={true}
-          textContentType="password"
+          
         />
       </ThemedView>
       <ThemedView>
