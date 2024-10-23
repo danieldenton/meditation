@@ -9,15 +9,18 @@ import {
 } from "react";
 import { useRouter, useSegments } from "expo-router";
 
+type StateSetter = Dispatch<SetStateAction<string>>;
+
 type UserContextType = {
   uid: string;
-  setUid: Dispatch<SetStateAction<string>>;
+  setUid: StateSetter;
   firstName: string;
-  setFirstName: Dispatch<SetStateAction<string>>;
+  setFirstName: StateSetter;
   lastName: string;
-  setLastName: Dispatch<SetStateAction<string>>;
+  setLastName: StateSetter;
   email: string;
-  setEmail: Dispatch<SetStateAction<string>>;
+  setEmail: StateSetter;
+  signOut: () => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -31,14 +34,19 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const [uid, setUid] = useState("");
 
   useEffect(() => {
-    if (!firstName && rootSegment !== "(auth)") {
-      router.push("/login");
-    }
     // const user = localStorage.getItem("user");
     // if (user) {
     //   setUser(JSON.parse(user));
     // }
   }, []);
+
+  const signOut = () => {
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setUid("");
+    router.push("/login");
+  }
 
   return (
     <UserContext.Provider
@@ -50,7 +58,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         email,
         setEmail,
         uid,
-        setUid
+        setUid,
+        signOut
       }}
     >
       {children}
