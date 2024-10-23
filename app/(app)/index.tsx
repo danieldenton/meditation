@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Pressable, Text } from "react-native";
+import { Image, Pressable, Text } from "react-native";
 import { Link } from "expo-router";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
