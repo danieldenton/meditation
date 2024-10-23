@@ -23,7 +23,7 @@ export default function RootLayout() {
   const { email } = useUser();
 
   if (!email) {
-    <Redirect href="/login" />;
+    return <Redirect href="/login" />;
   }
 
   useEffect(() => {

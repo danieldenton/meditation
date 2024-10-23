@@ -13,10 +13,13 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
   },
   button: {
-    alignItems: "center",
-    backgroundColor: "#DDDDDD",
+    textAlign: "center",
+    justifyContent: "center",
+    backgroundColor:  "#9370DB",
     padding: 10,
     height: 40,
     width: 250,
+    fontWeight: "bold",
+    color: "white",
   }
 });

@@ -7,7 +7,7 @@ import {
   useEffect,
   useContext,
 } from "react";
-import { useRouter, useSegments } from "expo-router";
+import { useRouter } from "expo-router";
 
 type StateSetter = Dispatch<SetStateAction<string>>;
 
@@ -20,17 +20,19 @@ type UserContextType = {
   setLastName: StateSetter;
   email: string;
   setEmail: StateSetter;
+  password: string;
+  setPassword: StateSetter;
   signOut: () => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
-  const rootSegment = useSegments();
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [uid, setUid] = useState("");
 
   useEffect(() => {
@@ -38,6 +40,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     // if (user) {
     //   setUser(JSON.parse(user));
     // }
+    setEmail("")
   }, []);
 
   const signOut = () => {
@@ -57,6 +60,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         setLastName,
         email,
         setEmail,
+        password,
+        setPassword,
         uid,
         setUid,
         signOut
