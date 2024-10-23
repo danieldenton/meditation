@@ -1,31 +1,58 @@
-import { ReactNode, Dispatch, createContext, useState, SetStateAction, useEffect, useContext } from "react";
-
-type User = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-};
+import {
+  ReactNode,
+  Dispatch,
+  createContext,
+  useState,
+  SetStateAction,
+  useEffect,
+  useContext,
+} from "react";
+import { useRouter, useSegments } from "expo-router";
 
 type UserContextType = {
-  user: User | null;
-  setUser: Dispatch<SetStateAction<User | null>>;
+  uid: string;
+  setUid: Dispatch<SetStateAction<string>>;
+  firstName: string;
+  setFirstName: Dispatch<SetStateAction<string>>;
+  lastName: string;
+  setLastName: Dispatch<SetStateAction<string>>;
+  email: string;
+  setEmail: Dispatch<SetStateAction<string>>;
 };
 
-const UserContext = createContext<UserContextType | null>(null);
+const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const rootSegment = useSegments();
+  const router = useRouter();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [uid, setUid] = useState("");
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      setUser(JSON.parse(user));
+    if (!firstName && rootSegment !== "(auth)") {
+      router.push("/login");
     }
+    // const user = localStorage.getItem("user");
+    // if (user) {
+    //   setUser(JSON.parse(user));
+    // }
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider
+      value={{
+        firstName,
+        setFirstName,
+        lastName,
+        setLastName,
+        email,
+        setEmail,
+        uid,
+        setUid
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
