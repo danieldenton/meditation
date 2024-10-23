@@ -20,8 +20,13 @@ type UserContextType = {
   setLastName: StateSetter;
   email: string;
   setEmail: StateSetter;
-  password: string;
+  // password: string;
   setPassword: StateSetter;
+  // confirmPassword: string;
+  setConfirmPassword: StateSetter;
+  error: string;
+  // setError: StateSetter;
+  handleRegister: () => void;
   signOut: () => void;
 };
 
@@ -33,6 +38,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
   const [uid, setUid] = useState("");
 
   useEffect(() => {
@@ -40,8 +47,29 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     // if (user) {
     //   setUser(JSON.parse(user));
     // }
-    setEmail("")
   }, []);
+
+  const handleRegister = () => {
+    if (!firstName) {
+      setError("Please enter your first name");
+      return;
+    }
+    if (!lastName) {
+      setError("Please enter your last name");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+    setError("");
+    router.push("/(app)");
+  };
 
   const signOut = () => {
     setFirstName("");
@@ -60,10 +88,12 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         setLastName,
         email,
         setEmail,
-        password,
         setPassword,
+        setConfirmPassword,
         uid,
         setUid,
+        handleRegister,
+        error,
         signOut
       }}
     >

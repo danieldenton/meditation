@@ -1,5 +1,5 @@
-import { View, TextInput } from "react-native";
-import { Link } from "expo-router";
+import { View, Text, TextInput, Pressable } from "react-native";
+import { useRouter, Link } from "expo-router";
 
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
@@ -8,6 +8,11 @@ import { useUser } from "@/context/user";
 
 export default function LoginScreen() {
   const { setEmail, setPassword } = useUser();
+  const router = useRouter();
+
+  const login = () => {
+    router.push("/(app)");
+  }
 
   return (
     <View style={styles.container}>
@@ -27,13 +32,18 @@ export default function LoginScreen() {
           secureTextEntry={true}
         />
       </ThemedView>
-      <Link href="/(app)" style={styles.button}>
-        Login
-      </Link>
-      <ThemedView><ThemedText>
-        Don't have an accout?</ThemedText></ThemedView>
+      <Pressable onPress={login} style={styles.button}>
+        <Text style={styles.buttonText}>Login</Text>
+      </Pressable>
       <ThemedView>
-        <Link href="/register" style={styles.button}>Create one</Link>
+        <ThemedText>Don't have an accout?</ThemedText>
+      </ThemedView>
+      <ThemedView>
+        <Link href="/register" asChild>
+        <Pressable style={styles.button}>
+          <Text style={styles.buttonText}>Create Account</Text>
+        </Pressable>
+        </Link>
       </ThemedView>
     </View>
   );
