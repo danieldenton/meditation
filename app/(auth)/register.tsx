@@ -13,6 +13,7 @@ export default function RegisterScreen() {
     setPassword,
     setConfirmPassword,
     handleRegister,
+    error,
   } = useUser();
 
   return (
@@ -62,6 +63,7 @@ export default function RegisterScreen() {
       <Pressable onPress={handleRegister} style={styles.button}>
         <Text style={styles.buttonText}>Create Account</Text>
       </Pressable>
+      {error ? <Text style={styles.error}>{error}</Text> : null}
     </View>
   );
 }

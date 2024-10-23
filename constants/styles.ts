@@ -27,4 +27,9 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     justifyContent: "center",
   },
+  error: {
+    marginTop: 10,
+    color: "red",
+    fontWeight: "bold",
+  }
 });
