@@ -1,7 +1,7 @@
 import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import "react-native-reanimated";
-import firebase from "firebase/compat/app";
+import { initializeApp } from "firebase/app";
 
 import { UserContextProvider } from "@/context/user";
 
@@ -9,18 +9,16 @@ import { UserContextProvider } from "@/context/user";
 SplashScreen.preventAutoHideAsync();
 
 const firebaseConfig = {
-    apiKey: "",
+    apiKey: "AIzaSyCS0C9GOiPI0ZSTGfMZ17tGUlaOjfFdz10",
     authDomain: "meditation-app-7e00d.firebaseapp.com",
     projectId: "meditation-app-7e00d",
     storageBucket: "meditation-app-7e00d.appspot.com",
-    messagingSenderId: "",
-    appId: "",
-    measurementId: "G-",
+    messagingSenderId: "225278492513",
+    appId: "1:225278492513:web:00ebe9e7c8c8657efe8f20",
+    measurementId: "G-S2XB4EGM4F"
   };
-  
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
+
+initializeApp(firebaseConfig);
 
 export default function Root() {
   return (
