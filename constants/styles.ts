@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
     height: 40,
     width: 250,
     margin: 12,
+    padding: 4,
     borderWidth: 1,
   },
   button: {
