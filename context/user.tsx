@@ -134,9 +134,9 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 
   const signOut = async () => {
     try {
-      setFirstName("");
-      setLastName("");
-      setEmail("");
+      // setFirstName("");
+      // setLastName("");
+      // setEmail("");
       setUid("");
       router.push("/login");
       await AsyncStorage.removeItem("@user");
