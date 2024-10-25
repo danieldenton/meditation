@@ -1,7 +1,4 @@
-import { View, Text, TextInput, Pressable } from "react-native";
-
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import { View, Text, Pressable } from "react-native";
 import TextInputWithLabel from "@/components/TextInputWithLabel";
 import { styles } from "@/constants/Styles";
 import { useUser } from "@/context/user";
@@ -66,7 +63,7 @@ export default function RegisterScreen() {
       secureTextEntry={input.secureTextEntry}
     />
   ));
-  
+
   return (
     <View style={styles.container}>
       {inputs}

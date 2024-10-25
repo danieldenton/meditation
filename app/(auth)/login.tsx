@@ -1,33 +1,47 @@
 import { View, Text, TextInput, Pressable } from "react-native";
 import { Link } from "expo-router";
 
-import { ThemedText } from "@/components/ThemedText";
+import TextInputWithLabel from "@/components/TextInputWithLabel";
+import { TextInputWithLabelProps } from "@/constants/Types";
 import { ThemedView } from "@/components/ThemedView";
+import { ThemedText } from "@/components/ThemedText";
 import { styles } from "@/constants/Styles";
 import { useUser } from "@/context/user";
 
 export default function LoginScreen() {
   const { setEmail, setPassword, handleLogin, error } = useUser();
 
+  const inputData: TextInputWithLabelProps[] = [
+    {
+      label: "Email",
+      textContentType: "emailAddress",
+      onChangeText: setEmail,
+      autoCapitalize: "none",
+      secureTextEntry: false,
+    },
+    {
+      label: "Password",
+      textContentType: "password",
+      onChangeText: setPassword,
+      autoCapitalize: "none",
+      secureTextEntry: true,
+    },
+  ]
+
+  const inputs = inputData.map((input, index) => (
+    <TextInputWithLabel
+      key={index}
+      label={input.label}
+      onChangeText={input.onChangeText}
+      textContentType={input.textContentType}
+      autoCapitalize={input.autoCapitalize}
+      secureTextEntry={input.secureTextEntry}
+    />
+  ));
+
   return (
     <View style={styles.container}>
-      <ThemedView>
-        <ThemedText type="default">Email</ThemedText>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setEmail(text)}
-          textContentType="emailAddress"
-          autoCapitalize="none"
-        />
-      </ThemedView>
-      <ThemedView>
-        <ThemedText type="default">Password</ThemedText>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setPassword(text)}
-          secureTextEntry={true}
-        />
-      </ThemedView>
+      {inputs}
       <Pressable onPress={handleLogin} style={styles.button}>
         <Text style={styles.buttonText}>Login</Text>
       </Pressable>
