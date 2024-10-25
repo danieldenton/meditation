@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
+import { Href } from 'expo-router';
 
 export type StateSetter = Dispatch<SetStateAction<string>>;
 
@@ -9,3 +10,9 @@ export type TextInputWithLabelProps = {
     autoCapitalize: "none" | "words";
     secureTextEntry: boolean;
   };
+
+  export type HomePageLinksProps = {
+    title: string;
+    href: Href;
+  };
+  
