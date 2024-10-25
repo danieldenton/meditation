@@ -57,6 +57,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     // }
   }, []);
 
+  // FIREBASE AUTHENTICATION
+  // REGISTER NEW USER
   const handleRegister = () => {
     if (!firstName || !lastName) {
       setError("Please enter your first and last name");
@@ -93,6 +95,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       });
   };
 
+  // LOGIN USER
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
