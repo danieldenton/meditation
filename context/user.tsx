@@ -50,10 +50,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const [uid, setUid] = useState("");
 
   useEffect(() => {
-    // const user = localStorage.getItem("user");
-    // if (user) {
-    //   setUser(JSON.parse(user));
-    // }
+    loadUser();
   }, []);
 
   const checkUserRegister = () => {
@@ -75,7 +72,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
   };
-  
+
   // FIREBASE AUTHENTICATION
   // REGISTER NEW USER
   const handleRegister = () => {
@@ -114,10 +111,9 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // AsyncStorage functions
-  const saveUser = async (value: UserCredential) => {
+  const saveUser = async (user: UserCredential) => {
     try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("@user", jsonValue);
+      await AsyncStorage.setItem("@user", JSON.stringify(user));
     } catch (error) {
       console.log("error storing user", error);
     }
@@ -125,20 +121,22 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 
   const loadUser = async () => {
     try {
-      const value = await AsyncStorage.getItem("@user");
-      if (value !== null) {
-        // setUser(JSON.parse(value));
+      const userString = await AsyncStorage.getItem("user");
+      if (userString) {
+        const user = JSON.parse(userString);
+        setUid(user.user.uid);
+        console.log(uid);
       }
-    } catch (e) {
-      console.log("error loading user", e);
+    } catch (error) {
+      console.error("error loading user", error);
     }
   };
 
   const signOut = async () => {
     try {
-      // setFirstName("");
-      // setLastName("");
-      // setEmail("");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
       setUid("");
       router.push("/login");
       await AsyncStorage.removeItem("@user");
