@@ -8,6 +8,11 @@ import {
   useContext,
 } from "react";
 import { useRouter } from "expo-router";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 type StateSetter = Dispatch<SetStateAction<string>>;
 
@@ -27,12 +32,14 @@ type UserContextType = {
   error: string;
   // setError: StateSetter;
   handleRegister: () => void;
+  handleLogin: () => void;
   signOut: () => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
+  const auth = getAuth();
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -50,12 +57,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const handleRegister = () => {
-    if (!firstName) {
-      setError("Please enter your first name");
-      return;
-    }
-    if (!lastName) {
-      setError("Please enter your last name");
+    if (!firstName || !lastName) {
+      setError("Please enter your first and last name");
       return;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -63,12 +66,48 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       setError("Please enter a valid email address");
       return;
     }
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
-    setError("");
-    router.push("/(app)");
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        // see what user looks like
+        console.log(user.uid);
+        // POST USER TO DB HERE
+        setError("");
+        router.push("/(app)");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+        console.error(errorCode, errorMessage);
+      });
+  };
+
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        // see what user looks like
+        console.log(user.uid);
+        setUid(user.uid);
+        setError("");
+        router.push("/(app)");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+        console.error(errorCode, errorMessage);
+      });
   };
 
   const signOut = () => {
@@ -77,7 +116,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     setEmail("");
     setUid("");
     router.push("/login");
-  }
+  };
 
   return (
     <UserContext.Provider
@@ -93,8 +132,9 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         uid,
         setUid,
         handleRegister,
+        handleLogin,
         error,
-        signOut
+        signOut,
       }}
     >
       {children}

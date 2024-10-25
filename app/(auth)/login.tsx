@@ -1,5 +1,5 @@
 import { View, Text, TextInput, Pressable } from "react-native";
-import { useRouter, Link } from "expo-router";
+import { Link } from "expo-router";
 
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
@@ -7,12 +7,7 @@ import { styles } from "@/constants/styles";
 import { useUser } from "@/context/user";
 
 export default function LoginScreen() {
-  const { setEmail, setPassword } = useUser();
-  const router = useRouter();
-
-  const login = () => {
-    router.push("/(app)");
-  }
+  const { setEmail, setPassword, handleLogin, error } = useUser();
 
   return (
     <View style={styles.container}>
@@ -22,6 +17,7 @@ export default function LoginScreen() {
           style={styles.input}
           onChangeText={(text) => setEmail(text)}
           textContentType="emailAddress"
+          autoCapitalize="none"
         />
       </ThemedView>
       <ThemedView>
@@ -32,7 +28,7 @@ export default function LoginScreen() {
           secureTextEntry={true}
         />
       </ThemedView>
-      <Pressable onPress={login} style={styles.button}>
+      <Pressable onPress={handleLogin} style={styles.button}>
         <Text style={styles.buttonText}>Login</Text>
       </Pressable>
       <ThemedView>
@@ -40,11 +36,12 @@ export default function LoginScreen() {
       </ThemedView>
       <ThemedView>
         <Link href="/register" asChild>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Create Account</Text>
-        </Pressable>
+          <Pressable style={styles.button}>
+            <Text style={styles.buttonText}>Create Account</Text>
+          </Pressable>
         </Link>
       </ThemedView>
+      {error ? <Text style={styles.error}>{error}</Text> : null}
     </View>
   );
 }
