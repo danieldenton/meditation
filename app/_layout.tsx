@@ -4,6 +4,7 @@ import "react-native-reanimated";
 import { initializeApp } from "firebase/app";
 
 import { UserContextProvider } from "@/context/user";
+import { FIREBASE_API_KEY } from '@env'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
