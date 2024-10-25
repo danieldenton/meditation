@@ -116,8 +116,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     try {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem("@user", jsonValue);
-    } catch (e) {
-      console.log("error storing user", e);
+    } catch (error) {
+      console.log("error storing user", error);
     }
   };
 
