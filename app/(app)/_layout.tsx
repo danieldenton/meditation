@@ -20,9 +20,9 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require("../../assets/fonts/SpaceMono-Regular.ttf"),
   });
-  const { email } = useUser();
+  const { uid } = useUser();
 
-  if (!email) {
+  if (!uid) {
     return <Redirect href="/login" />;
   }
 

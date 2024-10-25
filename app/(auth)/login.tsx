@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Pressable } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { Link } from "expo-router";
 
 import TextInputWithLabel from "@/components/TextInputWithLabel";
