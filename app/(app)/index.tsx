@@ -4,7 +4,7 @@ import { Link } from "expo-router";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { styles } from "@/constants/styles";
+import { styles } from "@/constants/Styles";
 import { useUser } from "@/context/user";
 
 export default function HomeScreen() {

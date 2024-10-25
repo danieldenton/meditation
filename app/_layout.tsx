@@ -29,7 +29,7 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-export default function Root() {
+export default function RootLayout() {
   return (
     <UserContextProvider>
       <Slot />
