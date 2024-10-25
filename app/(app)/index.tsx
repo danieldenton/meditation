@@ -27,7 +27,7 @@ const linkData: HomePageLinksProps[] = [
   },
 ];
 
-const links = linkData.map((link) => (
+const homePageLinks = linkData.map((link) => (
   <HomePageLinks key={link.title} title={link.title} href={link.href} />
 ));
 
@@ -59,7 +59,7 @@ export default function HomeScreen() {
           I left the above image cuz we could easily put an image right there.
         </ThemedText>
       </ThemedView>
-      {links}
+      {homePageLinks}
       <ThemedView style={styles.titleContainer}>
         <Pressable onPress={signOut} style={styles.button}>
           <Text style={styles.buttonText}>Sign Out</Text>
