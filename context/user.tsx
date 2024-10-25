@@ -10,6 +10,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  UserCredential,
 } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -55,9 +56,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     // }
   }, []);
 
-  // FIREBASE AUTHENTICATION
-  // REGISTER NEW USER
-  const handleRegister = () => {
+  const checkUserRegister = () => {
     if (!firstName || !lastName) {
       setError("Please enter your first and last name");
       return;
@@ -75,12 +74,16 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       setError("Passwords do not match");
       return;
     }
-
+  };
+  
+  // FIREBASE AUTHENTICATION
+  // REGISTER NEW USER
+  const handleRegister = () => {
+    checkUserRegister();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
-        // see what user looks like
-        console.log(user.uid);
+        saveUser(userCredential);
+        setUid(userCredential.user.uid);
         // POST USER TO DB HERE
         setError("");
         router.push("/(app)");
@@ -97,10 +100,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
-        // see what user looks like
-        console.log(user.uid);
-        setUid(user.uid);
+        saveUser(userCredential);
+        setUid(userCredential.user.uid);
         setError("");
         router.push("/(app)");
       })
@@ -113,7 +114,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // AsyncStorage functions
-  const saveUser = async (value: string) => {
+  const saveUser = async (value: UserCredential) => {
     try {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem("@user", jsonValue);
