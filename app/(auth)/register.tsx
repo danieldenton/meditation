@@ -53,7 +53,7 @@ export default function RegisterScreen() {
     },
   ];
 
-  const inputs = inputData.map((input, index) => (
+  const textInputsWithLabels = inputData.map((input, index) => (
     <TextInputWithLabel
       key={index}
       label={input.label}
@@ -66,7 +66,7 @@ export default function RegisterScreen() {
 
   return (
     <View style={styles.container}>
-      {inputs}
+      {textInputsWithLabels}
       <Pressable onPress={handleRegister} style={styles.button}>
         <Text style={styles.buttonText}>Create Account</Text>
       </Pressable>

@@ -28,7 +28,7 @@ export default function LoginScreen() {
     },
   ]
 
-  const inputs = inputData.map((input, index) => (
+  const inputsWithLabels = inputData.map((input, index) => (
     <TextInputWithLabel
       key={index}
       label={input.label}
@@ -41,7 +41,7 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      {inputs}
+      {inputsWithLabels}
       <Pressable onPress={handleLogin} style={styles.button}>
         <Text style={styles.buttonText}>Login</Text>
       </Pressable>
