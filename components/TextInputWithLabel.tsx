@@ -1,5 +1,4 @@
 import { TextInput } from "react-native";
-
 import { ThemedText } from "./ThemedText";
 import { ThemedView } from "./ThemedView";
 import { styles } from "@/constants/Styles";
@@ -12,7 +11,7 @@ export const TextInputWithLabel = ({
   autoCapitalize,
   secureTextEntry,
 }: TextInputWithLabelProps) => {
-  console.log("render TextInputWithLabel");
+  
   return (
     <ThemedView>
       <ThemedText type="default">{label}</ThemedText>
