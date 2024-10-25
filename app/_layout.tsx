@@ -4,19 +4,28 @@ import "react-native-reanimated";
 import { initializeApp } from "firebase/app";
 
 import { UserContextProvider } from "@/context/user";
+import {
+  FIREBASE_API_KEY,
+  AUTH_DOMAIN,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+  MESSAGING_SENDER_ID,
+  APP_ID,
+  MEASUREMENT_ID,
+} from "@env";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCS0C9GOiPI0ZSTGfMZ17tGUlaOjfFdz10",
-    authDomain: "meditation-app-7e00d.firebaseapp.com",
-    projectId: "meditation-app-7e00d",
-    storageBucket: "meditation-app-7e00d.appspot.com",
-    messagingSenderId: "225278492513",
-    appId: "1:225278492513:web:00ebe9e7c8c8657efe8f20",
-    measurementId: "G-S2XB4EGM4F"
-  };
+  apiKey: FIREBASE_API_KEY,
+  authDomain: AUTH_DOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: APP_ID,
+  measurementId: MEASUREMENT_ID,
+};
 
 initializeApp(firebaseConfig);
 
