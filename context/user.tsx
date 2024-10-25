@@ -1,9 +1,7 @@
 import {
   ReactNode,
-  Dispatch,
   createContext,
   useState,
-  SetStateAction,
   useEffect,
   useContext,
 } from "react";
@@ -15,7 +13,7 @@ import {
 } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-type StateSetter = Dispatch<SetStateAction<string>>;
+import { StateSetter } from "@/constants/Types";
 
 type UserContextType = {
   uid: string;
