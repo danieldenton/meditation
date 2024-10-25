@@ -1,7 +1,7 @@
 import { View, Text, Pressable } from "react-native";
 import { Link } from "expo-router";
 
-import TextInputWithLabel from "@/components/TextInputWithLabel";
+import { TextInputWithLabel } from "@/components/TextInputWithLabel";
 import { TextInputWithLabelProps } from "@/constants/Types";
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";

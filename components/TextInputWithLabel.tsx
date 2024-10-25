@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { TextInput } from "react-native";
 
 import { ThemedText } from "./ThemedText";
@@ -6,13 +5,13 @@ import { ThemedView } from "./ThemedView";
 import { styles } from "@/constants/Styles";
 import { TextInputWithLabelProps } from "@/constants/Types";
 
-function TextInputWithLabel({
+export const TextInputWithLabel = ({
   label,
   onChangeText,
   textContentType,
   autoCapitalize,
   secureTextEntry,
-}: TextInputWithLabelProps) {
+}: TextInputWithLabelProps) => {
   console.log("render TextInputWithLabel");
   return (
     <ThemedView>
@@ -26,6 +25,4 @@ function TextInputWithLabel({
       />
     </ThemedView>
   );
-}
-
-export default memo(TextInputWithLabel);
+};

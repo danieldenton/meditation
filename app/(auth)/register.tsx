@@ -1,5 +1,5 @@
 import { View, Text, Pressable } from "react-native";
-import TextInputWithLabel from "@/components/TextInputWithLabel";
+import { TextInputWithLabel } from "@/components/TextInputWithLabel";
 import { styles } from "@/constants/Styles";
 import { useUser } from "@/context/user";
 import { TextInputWithLabelProps } from "@/constants/Types";
