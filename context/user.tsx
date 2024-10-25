@@ -60,6 +60,10 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       setError("Please enter a valid email address");
       return;
     }
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -70,17 +74,16 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         const user = userCredential.user;
         // see what user looks like
         console.log(user);
+        // POST USER TO DB HERE
+        setError("");
+        router.push("/(app)");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         setError(errorMessage);
         console.error(errorCode, errorMessage);
-      }).finally(() => {
-        // POST USER TO DB HERE
-        setError("");
-        router.push("/(app)");
-      })
+      });
   };
 
   const signOut = () => {
@@ -89,7 +92,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     setEmail("");
     setUid("");
     router.push("/login");
-  }
+  };
 
   return (
     <UserContext.Provider
@@ -106,7 +109,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         setUid,
         handleRegister,
         error,
-        signOut
+        signOut,
       }}
     >
       {children}
