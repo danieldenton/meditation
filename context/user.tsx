@@ -132,12 +132,16 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const clearUserState = () => {
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setUid("");
+  };
+
   const signOut = async () => {
     try {
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setUid("");
+      clearUserState();
       router.push("/login");
       await AsyncStorage.removeItem("@user");
     } catch (e) {

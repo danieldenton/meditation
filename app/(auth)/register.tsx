@@ -66,51 +66,10 @@ export default function RegisterScreen() {
       secureTextEntry={input.secureTextEntry}
     />
   ));
+  
   return (
     <View style={styles.container}>
-      <ThemedView>
-        <ThemedText type="default">First Name</ThemedText>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setFirstName(text)}
-          textContentType="givenName"
-        />
-      </ThemedView>
-      <ThemedView>
-        <ThemedText type="default">Last Name</ThemedText>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setLastName(text)}
-          textContentType="familyName"
-        />
-      </ThemedView>
-      <ThemedView>
-        <ThemedText type="default">Email</ThemedText>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setEmail(text)}
-          textContentType="emailAddress"
-          autoCapitalize="none"
-        />
-      </ThemedView>
-      <ThemedView>
-        <ThemedText type="default">Password</ThemedText>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setPassword(text)}
-          secureTextEntry={true}
-          textContentType="password"
-        />
-      </ThemedView>
-      <ThemedView>
-        <ThemedText type="default">Confirm Password</ThemedText>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setConfirmPassword(text)}
-          secureTextEntry={true}
-          textContentType="password"
-        />
-      </ThemedView>
+      {inputs}
       <Pressable onPress={handleRegister} style={styles.button}>
         <Text style={styles.buttonText}>Create Account</Text>
       </Pressable>
