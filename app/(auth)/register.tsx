@@ -40,6 +40,7 @@ export default function RegisterScreen() {
           style={styles.input}
           onChangeText={(text) => setEmail(text)}
           textContentType="emailAddress"
+          autoCapitalize="none"
         />
       </ThemedView>
       <ThemedView>
@@ -48,7 +49,7 @@ export default function RegisterScreen() {
           style={styles.input}
           onChangeText={(text) => setPassword(text)}
           secureTextEntry={true}
-          //  textContentType="password"
+           textContentType="password"
         />
       </ThemedView>
       <ThemedView>

@@ -8,7 +8,11 @@ import {
   useContext,
 } from "react";
 import { useRouter } from "expo-router";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 type StateSetter = Dispatch<SetStateAction<string>>;
 
@@ -28,12 +32,14 @@ type UserContextType = {
   error: string;
   // setError: StateSetter;
   handleRegister: () => void;
+  handleLogin: () => void;
   signOut: () => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
+  const auth = getAuth();
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -68,13 +74,31 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       setError("Passwords do not match");
       return;
     }
-    const auth = getAuth();
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         // see what user looks like
-        console.log(user);
+        console.log(user.uid);
         // POST USER TO DB HERE
+        setError("");
+        router.push("/(app)");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+        console.error(errorCode, errorMessage);
+      });
+  };
+
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        // see what user looks like
+        console.log(user.uid);
+        setUid(user.uid);
         setError("");
         router.push("/(app)");
       })
@@ -108,6 +132,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         uid,
         setUid,
         handleRegister,
+        handleLogin,
         error,
         signOut,
       }}
