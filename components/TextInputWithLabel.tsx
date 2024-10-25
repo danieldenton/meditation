@@ -4,24 +4,19 @@ import { TextInput } from "react-native";
 import { ThemedText } from "./ThemedText";
 import { ThemedView } from "./ThemedView";
 import { styles } from "@/constants/styles";
-
-type TextInputWithLabelProps = {
-  onChangeText: (text: string) => void;
-  textContentType: "givenName" | "familyName" | "emailAddress" | "password";
-  autoCapitalize: "none" | "words";
-  secureTextEntry: boolean;
-};
+import { TextInputWithLabelProps } from "@/constants/Types";
 
 function TextInputWithLabel({
+  label,
   onChangeText,
   textContentType,
   autoCapitalize,
   secureTextEntry,
 }: TextInputWithLabelProps) {
-    console.log("render TextInputWithLabel");
+  console.log("render TextInputWithLabel");
   return (
     <ThemedView>
-      <ThemedText type="default">Email</ThemedText>
+      <ThemedText type="default">{label}</ThemedText>
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
