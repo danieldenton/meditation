@@ -13,6 +13,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type StateSetter = Dispatch<SetStateAction<string>>;
 
@@ -110,12 +111,38 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       });
   };
 
-  const signOut = () => {
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setUid("");
-    router.push("/login");
+  // AsyncStorage functions
+  const saveUser = async (value: string) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("@user", jsonValue);
+    } catch (e) {
+      console.log("error storing user", e);
+    }
+  };
+
+  const loadUser = async () => {
+    try {
+      const value = await AsyncStorage.getItem("@user");
+      if (value !== null) {
+        // setUser(JSON.parse(value));
+      }
+    } catch (e) {
+      console.log("error loading user", e);
+    }
+  };
+
+  const signOut = async () => {
+    try {
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setUid("");
+      router.push("/login");
+      await AsyncStorage.removeItem("@user");
+    } catch (e) {
+      console.log("error clearing user", e);
+    }
   };
 
   return (
