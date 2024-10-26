@@ -1,16 +1,19 @@
 import { View, Text, Pressable } from "react-native";
-import { Link } from "expo-router";
+import { useRouter } from "expo-router";
 
 import { TextInputWithLabel } from "@/components/TextInputWithLabel";
 import { TextInputWithLabelProps } from "@/constants/Types";
 import { ThemedText } from "@/components/ThemedText";
 import { styles } from "@/constants/Styles";
 import { useUser } from "@/context/user";
+import { Button } from "@/components/Button";
 
 export default function LoginScreen() {
   const { setEmail, setPassword, handleLogin, error, handlePasswordReset } =
     useUser();
-    const errorStyle = error !== "Password reset email sent" ? styles.error : styles.greenError
+  const router = useRouter();
+  const errorStyle =
+    error !== "Password reset email sent" ? styles.error : styles.greenError;
 
   const inputData: TextInputWithLabelProps[] = [
     {
@@ -43,19 +46,11 @@ export default function LoginScreen() {
   return (
     <View style={styles.container}>
       {inputsWithLabels}
-      <Pressable onPress={handleLogin} style={styles.button}>
-        <Text style={styles.buttonText}>Login</Text>
-      </Pressable>
+      <Button onPress={handleLogin} text="Login" />
       <View>
         <ThemedText>Don't have an account?</ThemedText>
       </View>
-      <View>
-        <Link href="/register" asChild>
-          <Pressable style={styles.button}>
-            <Text style={styles.buttonText}>Create Account</Text>
-          </Pressable>
-        </Link>
-      </View>
+      <Button onPress={() => router.push("/register")} text="Create Account" />
       <View>
         <Pressable onPress={handlePasswordReset}>
           <ThemedText type="link">Need to reset your password?</ThemedText>
