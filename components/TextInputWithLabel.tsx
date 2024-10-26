@@ -20,7 +20,7 @@ export const TextInputWithLabel = ({
         textContentType={textContentType}
         autoCapitalize={autoCapitalize}
         secureTextEntry={secureTextEntry}
-        underlineColorAndroid="transparent" 
+        underlineColorAndroid="transparent" // Make sure we need this for Android
         autoCorrect={false}
       />
     </ThemedView>
