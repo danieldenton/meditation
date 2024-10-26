@@ -6,8 +6,8 @@ import {
   useContext,
 } from "react";
 import { useRouter } from "expo-router";
+import { getAuth } from "../firebase";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,

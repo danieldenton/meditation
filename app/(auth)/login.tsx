@@ -9,7 +9,7 @@ import { styles } from "@/constants/Styles";
 import { useUser } from "@/context/user";
 
 export default function LoginScreen() {
-  const { setEmail, setPassword, handleLogin, error } = useUser();
+  const { setEmail, setPassword, handleLogin, error, handlePasswordReset } = useUser();
 
   const inputData: TextInputWithLabelProps[] = [
     {
@@ -46,7 +46,7 @@ export default function LoginScreen() {
         <Text style={styles.buttonText}>Login</Text>
       </Pressable>
       <ThemedView>
-        <ThemedText>Don't have an accout?</ThemedText>
+        <ThemedText>Don't have an account?</ThemedText>
       </ThemedView>
       <ThemedView>
         <Link href="/register" asChild>
