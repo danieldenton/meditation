@@ -1,14 +1,38 @@
 import { Image, Pressable, Text } from "react-native";
-import { Link } from "expo-router";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { styles } from "@/constants/styles";
+import HomePageLinks from "@/components/HomePageLinks";
+import { styles } from "@/constants/Styles";
+import { HomePageLinksProps } from "@/constants/Types";
 import { useUser } from "@/context/user";
 
+const linkData: HomePageLinksProps[] = [
+  {
+    title: "Timer",
+    href: "/timer",
+  },
+  {
+    title: "Community",
+    href: "/community",
+  },
+  {
+    title: "Food for Non-Thought",
+    href: "/food-for-non-thought",
+  },
+  {
+    title: "Events",
+    href: "/events",
+  },
+];
+
+const homePageLinks = linkData.map((link) => (
+  <HomePageLinks key={link.title} title={link.title} href={link.href} />
+));
+
 export default function HomeScreen() {
-  const { signOut } = useUser();
+  const { handleLogOut } = useUser();
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -35,34 +59,12 @@ export default function HomeScreen() {
           I left the above image cuz we could easily put an image right there.
         </ThemedText>
       </ThemedView>
+      {homePageLinks}
       <ThemedView style={styles.titleContainer}>
-        <Link href={"/timer"}>
-          <ThemedText type="link">Timer</ThemedText>
-          </Link>
-      </ThemedView>
-      <ThemedView style={styles.titleContainer}>
-        <Link href={"/community"}>
-          <ThemedText type="link">Community</ThemedText>
-          </Link>
-      </ThemedView>
-      <ThemedView style={styles.titleContainer}>
-        <Link href={"/food-for-non-thought"}>
-          <ThemedText type="link">Food for Non-Thought</ThemedText>
-          </Link>
-      </ThemedView>
-      <ThemedView style={styles.titleContainer}>
-        <Link href={"/events"}>
-          <ThemedText type="link">Events</ThemedText>
-          </Link>
-      </ThemedView>
-      <ThemedView style={styles.titleContainer}>
-  
-        <Pressable onPress={signOut} style={styles.button}>
+        <Pressable onPress={handleLogOut} style={styles.button}>
           <Text style={styles.buttonText}>Sign Out</Text>
         </Pressable>
-  
       </ThemedView>
     </ParallaxScrollView>
   );
 }
-

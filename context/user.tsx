@@ -1,21 +1,22 @@
 import {
   ReactNode,
-  Dispatch,
   createContext,
   useState,
-  SetStateAction,
   useEffect,
   useContext,
 } from "react";
 import { useRouter } from "expo-router";
+import { getAuth } from "../firebase";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+  UserCredential,
 } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-type StateSetter = Dispatch<SetStateAction<string>>;
+import { StateSetter } from "@/constants/Types";
 
 type UserContextType = {
   uid: string;
@@ -34,7 +35,8 @@ type UserContextType = {
   // setError: StateSetter;
   handleRegister: () => void;
   handleLogin: () => void;
-  signOut: () => void;
+  handleLogOut: () => void;
+  handlePasswordReset: () => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -51,13 +53,11 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const [uid, setUid] = useState("");
 
   useEffect(() => {
-    // const user = localStorage.getItem("user");
-    // if (user) {
-    //   setUser(JSON.parse(user));
-    // }
+    loadUser();
+    setError("");
   }, []);
 
-  const handleRegister = () => {
+  const checkUserRegister = () => {
     if (!firstName || !lastName) {
       setError("Please enter your first and last name");
       return;
@@ -75,12 +75,15 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       setError("Passwords do not match");
       return;
     }
+  };
 
+  // FIREBASE AUTHENTICATION
+  const handleRegister = () => {
+    checkUserRegister();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
-        // see what user looks like
-        console.log(user.uid);
+        saveUser(userCredential);
+        setUid(userCredential.user.uid);
         // POST USER TO DB HERE
         setError("");
         router.push("/(app)");
@@ -96,10 +99,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
-        // see what user looks like
-        console.log(user.uid);
-        setUid(user.uid);
+        saveUser(userCredential);
+        setUid(userCredential.user.uid);
         setError("");
         router.push("/(app)");
       })
@@ -111,11 +112,23 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       });
   };
 
+  const handlePasswordReset = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        setError("Password reset email sent");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+        console.error(errorCode, errorMessage);
+      });
+  };
+
   // AsyncStorage functions
-  const saveUser = async (value: string) => {
+  const saveUser = async (user: UserCredential) => {
     try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("@user", jsonValue);
+      await AsyncStorage.setItem("@user", JSON.stringify(user));
     } catch (error) {
       console.log("error storing user", error);
     }
@@ -123,27 +136,38 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 
   const loadUser = async () => {
     try {
-      const value = await AsyncStorage.getItem("@user");
-      if (value !== null) {
-        // setUser(JSON.parse(value));
+      const userString = await AsyncStorage.getItem("user");
+      if (userString) {
+        const user = JSON.parse(userString);
+        setUid(user.user.uid);
+        console.log(uid);
       }
-    } catch (e) {
-      console.log("error loading user", e);
+    } catch (error) {
+      console.error("error loading user", error);
     }
   };
 
-  const signOut = async () => {
+  const clearUserState = () => {
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setUid("");
+  };
+
+  const logOutOfFirebaseAndAsyncStorage = async () => {
     try {
-      // setFirstName("");
-      // setLastName("");
-      // setEmail("");
-      setUid("");
-      router.push("/login");
+      await signOut(auth);
       await AsyncStorage.removeItem("@user");
-    } catch (e) {
-      console.log("error clearing user", e);
+    } catch (error) {
+      console.log("error clearing user", error);
     }
   };
+  
+  const handleLogOut = () => {
+    clearUserState();
+    logOutOfFirebaseAndAsyncStorage();
+    router.push("/login");
+  }
 
   return (
     <UserContext.Provider
@@ -161,7 +185,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         handleRegister,
         handleLogin,
         error,
-        signOut,
+        handleLogOut,
+        handlePasswordReset,
       }}
     >
       {children}
