@@ -10,6 +10,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
   UserCredential,
 } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -33,7 +34,7 @@ type UserContextType = {
   // setError: StateSetter;
   handleRegister: () => void;
   handleLogin: () => void;
-  signOut: () => void;
+  logOut: () => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -139,11 +140,13 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     setUid("");
   };
 
-  const signOut = async () => {
+  const logOut = async () => {
     try {
+      await signOut(auth);
+      await AsyncStorage.removeItem("@user");
       clearUserState();
       router.push("/login");
-      await AsyncStorage.removeItem("@user");
+      
     } catch (e) {
       console.log("error clearing user", e);
     }
@@ -165,7 +168,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         handleRegister,
         handleLogin,
         error,
-        signOut,
+        logOut,
       }}
     >
       {children}
