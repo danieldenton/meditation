@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, SafeAreaView } from "react-native";
 import { useRouter } from "expo-router";
 
 import { TextInputWithLabel } from "@/components/TextInputWithLabel";
@@ -44,7 +44,7 @@ export default function LoginScreen() {
   ));
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {inputsWithLabels}
       <Button onPress={handleLogin} text="Login" />
       <View>
@@ -57,6 +57,6 @@ export default function LoginScreen() {
         </Pressable>
       </View>
       {error ? <Text style={errorStyle}>{error}</Text> : null}
-    </View>
+    </SafeAreaView>
   );
 }

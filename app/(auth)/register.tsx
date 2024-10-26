@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, SafeAreaView } from "react-native";
 import { TextInputWithLabel } from "@/components/TextInputWithLabel";
 import { styles } from "@/constants/Styles";
 import { useUser } from "@/context/user";
@@ -65,12 +65,12 @@ export default function RegisterScreen() {
   ));
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {textInputsWithLabels}
       <Pressable onPress={handleRegister} style={styles.button}>
         <Text style={styles.buttonText}>Create Account</Text>
       </Pressable>
       {error ? <Text style={styles.error}>{error}</Text> : null}
-    </View>
+    </SafeAreaView>
   );
 }

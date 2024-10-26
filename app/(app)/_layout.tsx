@@ -40,9 +40,12 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="food-for-non-thought" />
-        <Stack.Screen name="events" />
-        <Stack.Screen name="community" />
+        <Stack.Screen
+          name="food-for-non-thought"
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="events" options={{ headerShown: false }} />
+        <Stack.Screen name="community" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
   );
