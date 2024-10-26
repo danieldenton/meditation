@@ -36,6 +36,7 @@ type UserContextType = {
   handleRegister: () => void;
   handleLogin: () => void;
   logOut: () => void;
+  handlePasswordReset: () => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -111,16 +112,18 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       });
   };
 
-  sendPasswordResetEmail(auth, email)
-  .then(() => {
-    // Password reset email sent!
-    // ..
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
+  const handlePasswordReset = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        setError("Password reset email sent");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+        console.error(errorCode, errorMessage);
+      });
+  };
 
   // AsyncStorage functions
   const saveUser = async (user: UserCredential) => {
@@ -179,6 +182,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         handleLogin,
         error,
         logOut,
+        handlePasswordReset,
       }}
     >
       {children}
