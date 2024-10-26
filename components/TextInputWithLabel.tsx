@@ -11,7 +11,6 @@ export const TextInputWithLabel = ({
   autoCapitalize,
   secureTextEntry,
 }: TextInputWithLabelProps) => {
-  
   return (
     <ThemedView>
       <ThemedText type="default">{label}</ThemedText>
@@ -21,6 +20,8 @@ export const TextInputWithLabel = ({
         textContentType={textContentType}
         autoCapitalize={autoCapitalize}
         secureTextEntry={secureTextEntry}
+        underlineColorAndroid="transparent" 
+        autoCorrect={false}
       />
     </ThemedView>
   );
