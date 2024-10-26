@@ -11,7 +11,7 @@ export type TextInputWithLabelProps = {
     secureTextEntry: boolean;
   };
 
-  export type HomePageLinksProps = {
+  export type HomePageTilesProps = {
     title: string;
     href: Href;
   };

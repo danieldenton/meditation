@@ -1,16 +1,19 @@
-import { View, Text, Pressable } from "react-native";
-import { Link } from "expo-router";
-
+import { View, Text, Pressable, SafeAreaView } from "react-native";
+import { useRouter } from "expo-router";
+import { NavBar } from "@/components/NavBar";
 import { TextInputWithLabel } from "@/components/TextInputWithLabel";
 import { TextInputWithLabelProps } from "@/constants/Types";
-import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
 import { styles } from "@/constants/Styles";
 import { useUser } from "@/context/user";
+import { Button } from "@/components/Button";
 
 export default function LoginScreen() {
   const { setEmail, setPassword, handleLogin, error, handlePasswordReset } =
     useUser();
+  const router = useRouter();
+  const errorStyle =
+    error !== "Password reset email sent" ? styles.error : styles.greenError;
 
   const inputData: TextInputWithLabelProps[] = [
     {
@@ -41,27 +44,20 @@ export default function LoginScreen() {
   ));
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <NavBar title="Login" href={null}/>
       {inputsWithLabels}
-      <Pressable onPress={handleLogin} style={styles.button}>
-        <Text style={styles.buttonText}>Login</Text>
-      </Pressable>
-      <ThemedView>
+      <Button onPress={handleLogin} text="Login" />
+      <View>
         <ThemedText>Don't have an account?</ThemedText>
-      </ThemedView>
-      <ThemedView>
-        <Link href="/register" asChild>
-          <Pressable style={styles.button}>
-            <Text style={styles.buttonText}>Create Account</Text>
-          </Pressable>
-        </Link>
-      </ThemedView>
-      <ThemedView>
-        <Pressable>
+      </View>
+      <Button onPress={() => router.push("/register")} text="Create Account" />
+      <View>
+        <Pressable onPress={handlePasswordReset}>
           <ThemedText type="link">Need to reset your password?</ThemedText>
         </Pressable>
-      </ThemedView>
-      {error ? <Text style={styles.error}>{error}</Text> : null}
-    </View>
+      </View>
+      {error ? <Text style={errorStyle}>{error}</Text> : null}
+    </SafeAreaView>
   );
 }

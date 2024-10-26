@@ -1,21 +1,21 @@
-import { View } from "react-native";
-
+import { View, SafeAreaView } from "react-native";
+import { NavBar } from "@/components/NavBar";
 import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
 import { styles } from "@/constants/Styles";
 
 export default function TimerScreen() {
   return (
-    <View style={styles.container}>
-      <ThemedView>
+    <SafeAreaView style={styles.container}>
+    <NavBar href={"/(app)"} title="Timer"/>
+      <View>
         <ThemedText type="title">Timer</ThemedText>
-      </ThemedView>
-      <ThemedView>
+      </View>
+      <View>
         <ThemedText type="default">
           This is where the timer page would be.
         </ThemedText>
-      </ThemedView>
-    </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
