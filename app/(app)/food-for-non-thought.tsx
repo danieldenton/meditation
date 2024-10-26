@@ -1,12 +1,13 @@
-import { View } from "react-native";
-
+import { View, SafeAreaView } from "react-native";
+import { NavBar } from "@/components/NavBar";
 import { ThemedText } from "@/components/ThemedText";
 import { styles } from "@/constants/Styles";
 
 
 export default function FoodForNonThoughtScreen() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    <NavBar href={"/(app)"} title="Food for Non-Thought"/>
     <View>
       <ThemedText type="title">Food For Non-Thought</ThemedText>
       </View>
@@ -15,6 +16,6 @@ export default function FoodForNonThoughtScreen() {
         This is where the food for non-thought page would be.
       </ThemedText>
     </View>
-    </View>
+    </SafeAreaView>
   );
 }
