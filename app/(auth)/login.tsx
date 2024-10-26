@@ -11,6 +11,7 @@ import { useUser } from "@/context/user";
 export default function LoginScreen() {
   const { setEmail, setPassword, handleLogin, error, handlePasswordReset } =
     useUser();
+    const errorStyle = error !== "Password reset email sent" ? styles.error : styles.greenError
 
   const inputData: TextInputWithLabelProps[] = [
     {
@@ -57,11 +58,11 @@ export default function LoginScreen() {
         </Link>
       </ThemedView>
       <ThemedView>
-        <Pressable>
+        <Pressable onPress={handlePasswordReset}>
           <ThemedText type="link">Need to reset your password?</ThemedText>
         </Pressable>
       </ThemedView>
-      {error ? <Text style={styles.error}>{error}</Text> : null}
+      {error ? <Text style={errorStyle}>{error}</Text> : null}
     </View>
   );
 }
