@@ -1,4 +1,4 @@
-import { Pressable, Text, View, SafeAreaView } from "react-native";
+import { View, SafeAreaView } from "react-native";
 
 import { ThemedText } from "@/components/ThemedText";
 import HomePageTiles from "@/components/HomePageTiles";
