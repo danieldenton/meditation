@@ -44,6 +44,7 @@ export default function RootLayout() {
           name="food-for-non-thought"
           options={{ headerShown: false }}
         />
+        <Stack.Screen name="timer" options={{ headerShown: false }} />
         <Stack.Screen name="events" options={{ headerShown: false }} />
         <Stack.Screen name="community" options={{ headerShown: false }} />
       </Stack>
