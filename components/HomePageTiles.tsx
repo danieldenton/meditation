@@ -15,10 +15,12 @@ export default function HomePageTiles({ title, href }: HomePageTilesProps) {
  const styles = StyleSheet.create({
   tile: {
     margin: 10,
-    padding: 20,
-    backgroundColor: "#ADD8E6",
+    padding: 25,
+    // backgroundColor: "#B0C4DE",
     alignItems: "center",
     width: 300,
     borderRadius: 10,
+    borderColor: "#000080",
+    borderWidth: 2,
   }
  })
