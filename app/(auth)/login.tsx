@@ -3,7 +3,6 @@ import { Link } from "expo-router";
 
 import { TextInputWithLabel } from "@/components/TextInputWithLabel";
 import { TextInputWithLabelProps } from "@/constants/Types";
-import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
 import { styles } from "@/constants/Styles";
 import { useUser } from "@/context/user";
@@ -47,21 +46,21 @@ export default function LoginScreen() {
       <Pressable onPress={handleLogin} style={styles.button}>
         <Text style={styles.buttonText}>Login</Text>
       </Pressable>
-      <ThemedView>
+      <View>
         <ThemedText>Don't have an account?</ThemedText>
-      </ThemedView>
-      <ThemedView>
+      </View>
+      <View>
         <Link href="/register" asChild>
           <Pressable style={styles.button}>
             <Text style={styles.buttonText}>Create Account</Text>
           </Pressable>
         </Link>
-      </ThemedView>
-      <ThemedView>
+      </View>
+      <View>
         <Pressable onPress={handlePasswordReset}>
           <ThemedText type="link">Need to reset your password?</ThemedText>
         </Pressable>
-      </ThemedView>
+      </View>
       {error ? <Text style={errorStyle}>{error}</Text> : null}
     </View>
   );

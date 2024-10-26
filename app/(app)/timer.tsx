@@ -1,20 +1,18 @@
 import { View } from "react-native";
-
 import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
 import { styles } from "@/constants/Styles";
 
 export default function TimerScreen() {
   return (
     <View style={styles.container}>
-      <ThemedView>
+      <View>
         <ThemedText type="title">Timer</ThemedText>
-      </ThemedView>
-      <ThemedView>
+      </View>
+      <View>
         <ThemedText type="default">
           This is where the timer page would be.
         </ThemedText>
-      </ThemedView>
+      </View>
     </View>
   );
 }

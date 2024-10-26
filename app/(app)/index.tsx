@@ -1,8 +1,7 @@
-import { Image, Pressable, Text } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
 import HomePageLinks from "@/components/HomePageLinks";
 import { styles } from "@/constants/Styles";
 import { HomePageLinksProps } from "@/constants/Types";
@@ -43,28 +42,28 @@ export default function HomeScreen() {
         />
       }
     >
-      <ThemedView style={styles.titleContainer}>
+      <View style={styles.titleContainer}>
         <ThemedText type="title">Home Page</ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.titleContainer}>
+      </View>
+      <View style={styles.titleContainer}>
         <ThemedText type="subtitle">
           This is where the daily wisdom message would be.
         </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.titleContainer}>
+      </View>
+      <View style={styles.titleContainer}>
         <ThemedText type="default">Maybe any anouncements</ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.titleContainer}>
+      </View>
+      <View style={styles.titleContainer}>
         <ThemedText type="default">
           I left the above image cuz we could easily put an image right there.
         </ThemedText>
-      </ThemedView>
+      </View>
       {homePageLinks}
-      <ThemedView style={styles.titleContainer}>
+      <View style={styles.titleContainer}>
         <Pressable onPress={handleLogOut} style={styles.button}>
           <Text style={styles.buttonText}>Sign Out</Text>
         </Pressable>
-      </ThemedView>
+      </View>
     </ParallaxScrollView>
   );
 }

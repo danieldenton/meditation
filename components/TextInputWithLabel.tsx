@@ -1,6 +1,5 @@
-import { TextInput } from "react-native";
+import { TextInput, View } from "react-native";
 import { ThemedText } from "./ThemedText";
-import { ThemedView } from "./ThemedView";
 import { styles } from "@/constants/Styles";
 import { TextInputWithLabelProps } from "@/constants/Types";
 
@@ -12,7 +11,7 @@ export const TextInputWithLabel = ({
   secureTextEntry,
 }: TextInputWithLabelProps) => {
   return (
-    <ThemedView>
+    <View>
       <ThemedText type="default">{label}</ThemedText>
       <TextInput
         style={styles.input}
@@ -23,6 +22,6 @@ export const TextInputWithLabel = ({
         underlineColorAndroid="transparent" // Make sure we need this for Android
         autoCorrect={false}
       />
-    </ThemedView>
+    </View>
   );
 };

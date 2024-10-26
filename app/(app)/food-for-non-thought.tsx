@@ -1,21 +1,20 @@
 import { View } from "react-native";
 
 import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
 import { styles } from "@/constants/Styles";
 
 
 export default function FoodForNonThoughtScreen() {
   return (
     <View style={styles.container}>
-    <ThemedView>
+    <View>
       <ThemedText type="title">Food For Non-Thought</ThemedText>
-      </ThemedView>
-      <ThemedView>
+      </View>
+      <View>
       <ThemedText type="default">
         This is where the food for non-thought page would be.
       </ThemedText>
-    </ThemedView>
+    </View>
     </View>
   );
 }
