@@ -7,26 +7,11 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
+    margin: 40,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  dailyWisodomContainer: {
+    margin: 20,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-  },
-  // container: {
-  //   flex: 1,
-  //   alignItems: "center",
-  //   marginTop: 50,
-  // },
   input: {
     height: 40,
     width: 250,
