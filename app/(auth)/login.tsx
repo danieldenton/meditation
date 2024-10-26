@@ -9,7 +9,8 @@ import { styles } from "@/constants/Styles";
 import { useUser } from "@/context/user";
 
 export default function LoginScreen() {
-  const { setEmail, setPassword, handleLogin, error, handlePasswordReset } = useUser();
+  const { setEmail, setPassword, handleLogin, error, handlePasswordReset } =
+    useUser();
 
   const inputData: TextInputWithLabelProps[] = [
     {
@@ -26,7 +27,7 @@ export default function LoginScreen() {
       autoCapitalize: "none",
       secureTextEntry: true,
     },
-  ]
+  ];
 
   const inputsWithLabels = inputData.map((input, index) => (
     <TextInputWithLabel
@@ -54,6 +55,11 @@ export default function LoginScreen() {
             <Text style={styles.buttonText}>Create Account</Text>
           </Pressable>
         </Link>
+      </ThemedView>
+      <ThemedView>
+        <Pressable>
+          <ThemedText type="link">Need to reset your password?</ThemedText>
+        </Pressable>
       </ThemedView>
       {error ? <Text style={styles.error}>{error}</Text> : null}
     </View>

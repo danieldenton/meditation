@@ -48,5 +48,10 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     color: "red",
     fontWeight: "bold",
+  },
+  greenError: {
+    marginTop: 10,
+    color: "green",
+    fontWeight: "bold",
   }
 });

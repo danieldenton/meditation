@@ -35,7 +35,7 @@ type UserContextType = {
   // setError: StateSetter;
   handleRegister: () => void;
   handleLogin: () => void;
-  logOut: () => void;
+  handleLogOut: () => void;
   handlePasswordReset: () => void;
 };
 
@@ -154,16 +154,20 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     setUid("");
   };
 
-  const logOut = async () => {
+  const logOutOfFirebaseAndAsyncStorage = async () => {
     try {
       await signOut(auth);
       await AsyncStorage.removeItem("@user");
-      clearUserState();
-      router.push("/login");
     } catch (error) {
       console.log("error clearing user", error);
     }
   };
+  
+  const handleLogOut = () => {
+    clearUserState();
+    logOutOfFirebaseAndAsyncStorage();
+    router.push("/login");
+  }
 
   return (
     <UserContext.Provider
@@ -181,7 +185,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         handleRegister,
         handleLogin,
         error,
-        logOut,
+        handleLogOut,
         handlePasswordReset,
       }}
     >

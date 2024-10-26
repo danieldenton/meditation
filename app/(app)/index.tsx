@@ -32,7 +32,7 @@ const homePageLinks = linkData.map((link) => (
 ));
 
 export default function HomeScreen() {
-  const { logOut } = useUser();
+  const { handleLogOut } = useUser();
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -61,7 +61,7 @@ export default function HomeScreen() {
       </ThemedView>
       {homePageLinks}
       <ThemedView style={styles.titleContainer}>
-        <Pressable onPress={logOut} style={styles.button}>
+        <Pressable onPress={handleLogOut} style={styles.button}>
           <Text style={styles.buttonText}>Sign Out</Text>
         </Pressable>
       </ThemedView>
