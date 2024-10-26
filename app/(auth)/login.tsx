@@ -1,6 +1,6 @@
 import { View, Text, Pressable, SafeAreaView } from "react-native";
 import { useRouter } from "expo-router";
-
+import { NavBar } from "@/components/NavBar";
 import { TextInputWithLabel } from "@/components/TextInputWithLabel";
 import { TextInputWithLabelProps } from "@/constants/Types";
 import { ThemedText } from "@/components/ThemedText";
@@ -45,6 +45,7 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <NavBar title="Login" href={null}/>
       {inputsWithLabels}
       <Button onPress={handleLogin} text="Login" />
       <View>

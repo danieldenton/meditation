@@ -19,16 +19,7 @@ export const styles = StyleSheet.create({
     padding: 8,
     borderWidth: 1,
   },
-  button: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#B8A3E0",
-    padding: 15,
-    width: 300,
-    fontWeight: "bold",
-    color: "white",
-    borderRadius: 10,
-  },
+ 
   buttonText: {
     color: "white",
     fontWeight: "bold",
