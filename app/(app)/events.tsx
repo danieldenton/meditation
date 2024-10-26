@@ -1,12 +1,13 @@
-import { View } from "react-native";
-
+import { View, SafeAreaView } from "react-native";
+import { NavBar } from "@/components/NavBar";
 import { ThemedText } from "@/components/ThemedText";
 import { styles } from "@/constants/Styles";
 
 
 export default function EventsScreen() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    <NavBar href={"/(app)"} title="Events"/>
     <View>
       <ThemedText type="title">Events</ThemedText>
       </View>
@@ -15,6 +16,6 @@ export default function EventsScreen() {
         This is where the events page would be.
       </ThemedText>
     </View>
-    </View>
+    </SafeAreaView>
   );
 }

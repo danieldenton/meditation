@@ -7,7 +7,7 @@ import { styles } from "@/constants/Styles";
 export default function FoodForNonThoughtScreen() {
   return (
     <SafeAreaView style={styles.container}>
-    <NavBar href={"/(app)"} title="Food for Non-Thought"/>
+    <NavBar href={"/(app)"} title="Food For Non-Thought"/>
     <View>
       <ThemedText type="title">Food For Non-Thought</ThemedText>
       </View>
