@@ -11,6 +11,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  sendPasswordResetEmail,
   UserCredential,
 } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -52,6 +53,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     loadUser();
+    setError("");
   }, []);
 
   const checkUserRegister = () => {
@@ -75,7 +77,6 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // FIREBASE AUTHENTICATION
-  // REGISTER NEW USER
   const handleRegister = () => {
     checkUserRegister();
     createUserWithEmailAndPassword(auth, email, password)
@@ -94,7 +95,6 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       });
   };
 
-  // LOGIN USER
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -110,6 +110,17 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         console.error(errorCode, errorMessage);
       });
   };
+
+  sendPasswordResetEmail(auth, email)
+  .then(() => {
+    // Password reset email sent!
+    // ..
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
 
   // AsyncStorage functions
   const saveUser = async (user: UserCredential) => {
