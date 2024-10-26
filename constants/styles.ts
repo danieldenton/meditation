@@ -1,6 +1,11 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+  },
   titleContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -17,11 +22,11 @@ export const styles = StyleSheet.create({
     left: 0,
     position: "absolute",
   },
-  container: {
-    flex: 1,
-    alignItems: "center",
-    marginTop: 50,
-  },
+  // container: {
+  //   flex: 1,
+  //   alignItems: "center",
+  //   marginTop: 50,
+  // },
   input: {
     height: 40,
     width: 250,
