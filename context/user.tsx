@@ -146,9 +146,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       await AsyncStorage.removeItem("@user");
       clearUserState();
       router.push("/login");
-      
-    } catch (e) {
-      console.log("error clearing user", e);
+    } catch (error) {
+      console.log("error clearing user", error);
     }
   };
 
