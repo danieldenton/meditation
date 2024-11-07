@@ -2,7 +2,7 @@ import { Text, SafeAreaView } from "react-native";
 import { NavBar } from "@/components/NavBar";
 import { TextInputWithLabel } from "@/components/TextInputWithLabel";
 import { Button } from "@/components/Button";
-import { styles } from "@/constants/Styles";
+import { styles } from "@/constants/styles";
 import { useUser } from "@/context/user";
 import { TextInputWithLabelProps } from "@/constants/Types";
 
@@ -68,7 +68,7 @@ export default function RegisterScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <NavBar title="Create Account" href={"/login"}/>
+      <NavBar title="Create Account" href={"/login"} />
       {textInputsWithLabels}
       <Button onPress={handleRegister} text="Create Account" />
       {error ? <Text style={styles.error}>{error}</Text> : null}

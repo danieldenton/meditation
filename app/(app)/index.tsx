@@ -3,7 +3,7 @@ import { View, SafeAreaView } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import HomePageTiles from "@/components/HomePageTiles";
 import { Button } from "@/components/Button";
-import { styles } from "@/constants/Styles";
+import { styles } from "@/constants/styles";
 import { HomePageTilesProps } from "@/constants/Types";
 import { useUser } from "@/context/user";
 
@@ -47,7 +47,7 @@ export default function HomeScreen() {
         <ThemedText type="default">Maybe any anouncements</ThemedText>
       </View>
       {homePageTiles}
-      <Button onPress={handleLogOut} text="Sign Out"/>
+      <Button onPress={handleLogOut} text="Sign Out" />
     </SafeAreaView>
   );
 }

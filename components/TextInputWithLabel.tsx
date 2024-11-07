@@ -1,6 +1,6 @@
 import { TextInput, View } from "react-native";
 import { ThemedText } from "./ThemedText";
-import { styles } from "@/constants/Styles";
+import { styles } from "@/constants/styles";
 import { TextInputWithLabelProps } from "@/constants/Types";
 
 export const TextInputWithLabel = ({
