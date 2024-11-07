@@ -1,5 +1,6 @@
 # Meditation App
 
+gabes-dev
 The goal of this app is to support the user's meditation practice by sending daily reminder wisdom nuggets, tracking the consistency of their practice, and connecting them with community.
 
 ## User Stories
