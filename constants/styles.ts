@@ -19,7 +19,6 @@ export const styles = StyleSheet.create({
     padding: 8,
     borderWidth: 1,
   },
- 
   buttonText: {
     color: "white",
     fontWeight: "bold",

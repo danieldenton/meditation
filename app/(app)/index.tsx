@@ -1,9 +1,8 @@
 import { View, SafeAreaView } from "react-native";
-
 import { ThemedText } from "@/components/ThemedText";
 import HomePageTiles from "@/components/HomePageTiles";
 import { Button } from "@/components/Button";
-import { styles } from "@/constants/Styles";
+import { styles } from "@/constants/styles";
 import { HomePageTilesProps } from "@/constants/Types";
 import { useUser } from "@/context/user";
 

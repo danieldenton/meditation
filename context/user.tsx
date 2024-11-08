@@ -112,6 +112,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       });
   };
 
+  // TODO: Add a screen to handle this.
   const handlePasswordReset = () => {
     sendPasswordResetEmail(auth, email)
       .then(() => {
@@ -123,6 +124,15 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         setError(errorMessage);
         console.error(errorCode, errorMessage);
       });
+  };
+
+  const logOutOfFirebaseAndAsyncStorage = async () => {
+    try {
+      await signOut(auth);
+      await AsyncStorage.removeItem("@user");
+    } catch (error) {
+      console.log("error clearing user", error);
+    }
   };
 
   // AsyncStorage functions
@@ -152,15 +162,6 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     setLastName("");
     setEmail("");
     setUid("");
-  };
-
-  const logOutOfFirebaseAndAsyncStorage = async () => {
-    try {
-      await signOut(auth);
-      await AsyncStorage.removeItem("@user");
-    } catch (error) {
-      console.log("error clearing user", error);
-    }
   };
   
   const handleLogOut = () => {

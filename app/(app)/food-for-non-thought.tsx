@@ -1,7 +1,7 @@
 import { View, SafeAreaView } from "react-native";
 import { NavBar } from "@/components/NavBar";
 import { ThemedText } from "@/components/ThemedText";
-import { styles } from "@/constants/Styles";
+import { styles } from "@/constants/styles";
 
 
 export default function FoodForNonThoughtScreen() {

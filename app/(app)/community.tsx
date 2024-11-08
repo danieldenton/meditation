@@ -1,12 +1,12 @@
-import { View, SafeAreaView} from "react-native";
+import { View, SafeAreaView } from "react-native";
 import { NavBar } from "@/components/NavBar";
 import { ThemedText } from "@/components/ThemedText";
-import { styles } from "@/constants/Styles";
+import { styles } from "@/constants/styles";
 
 export default function CommunityScreen() {
   return (
     <SafeAreaView style={styles.container}>
-    <NavBar href={"/(app)"} title="Community"/>
+      <NavBar href={"/(app)"} title="Community" />
       <View>
         <ThemedText type="title">Community</ThemedText>
       </View>
@@ -16,6 +16,5 @@ export default function CommunityScreen() {
         </ThemedText>
       </View>
     </SafeAreaView>
-  
   );
 }
